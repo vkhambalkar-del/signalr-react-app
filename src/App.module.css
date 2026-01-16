@@ -1,19 +1,20 @@
-#root {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 2rem;
-}
-
-.app-container {
+.container {
   text-align: center;
 }
 
-h1 {
+.title {
   margin-bottom: 1.5rem;
 }
 
+.version {
+  font-size: 0.5em;
+  font-weight: 400;
+  color: #64748b;
+  vertical-align: middle;
+}
+
 /* Connection Status */
-.connection-status {
+.connectionStatus {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -22,24 +23,24 @@ h1 {
   font-size: 1.1rem;
 }
 
-.status-indicator {
+.statusIndicator {
   width: 12px;
   height: 12px;
   border-radius: 50%;
 }
 
-.status-indicator.connected {
+.connected {
   background-color: #22c55e;
   box-shadow: 0 0 8px #22c55e;
 }
 
-.status-indicator.disconnected {
+.disconnected {
   background-color: #ef4444;
   box-shadow: 0 0 8px #ef4444;
 }
 
 /* Error Message */
-.error-message {
+.errorMessage {
   background-color: #fef2f2;
   border: 1px solid #ef4444;
   color: #dc2626;
@@ -75,7 +76,7 @@ h1 {
 }
 
 /* Messages Container */
-.messages-container {
+.messagesContainer {
   background-color: #f8fafc;
   border: 1px solid #e2e8f0;
   border-radius: 8px;
@@ -84,20 +85,20 @@ h1 {
   text-align: left;
 }
 
-.messages-container h2 {
+.messagesTitle {
   margin: 0 0 1rem 0;
   font-size: 1.2rem;
   color: #334155;
 }
 
-.no-messages {
+.noMessages {
   color: #64748b;
   font-style: italic;
   text-align: center;
   padding: 2rem 0;
 }
 
-.messages-list {
+.messagesList {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -105,7 +106,7 @@ h1 {
   overflow-y: auto;
 }
 
-.message-item {
+.messageItem {
   display: flex;
   gap: 1rem;
   padding: 0.75rem;
@@ -115,19 +116,19 @@ h1 {
   margin-bottom: 0.5rem;
 }
 
-.message-time {
+.messageTime {
   color: #64748b;
   font-size: 0.85rem;
   white-space: nowrap;
 }
 
-.message-content {
+.messageContent {
   color: #1e293b;
   word-break: break-word;
 }
 
 /* Config Info */
-.config-info {
+.configInfo {
   font-size: 0.85rem;
   color: #64748b;
   background-color: #f1f5f9;
@@ -135,10 +136,10 @@ h1 {
   border-radius: 6px;
 }
 
-.config-info p {
+.configInfo p {
   margin: 0;
 }
 
-.config-info strong {
+.configInfo strong {
   color: #475569;
 }

@@ -1,8 +1,8 @@
 import { useSignalR } from './hooks/useSignalR';
-import './App.css';
+import styles from './App.module.css';
+import { version } from '../package.json';
 
 const SIGNALR_HUB_URL = import.meta.env.VITE_SIGNALR_HUB_URL || '';
-const SIGNALR_ACCESS_TOKEN = import.meta.env.VITE_SIGNALR_ACCESS_TOKEN || '';
 
 function App() {
   const {
@@ -15,27 +15,26 @@ function App() {
     clearMessages,
   } = useSignalR({
     hubUrl: SIGNALR_HUB_URL,
-    accessToken: SIGNALR_ACCESS_TOKEN,
     autoConnect: true,
   });
 
   return (
-    <div className="app-container">
-      <h1>Azure SignalR Demo</h1>
+    <div className={styles.container}>
+      <h1 className={styles.title}>Azure SignalR Demo <span className={styles.version}>v{version}</span></h1>
 
       {/* Connection Status */}
-      <div className="connection-status">
+      <div className={styles.connectionStatus}>
         <span
-          className={`status-indicator ${isConnected ? 'connected' : 'disconnected'}`}
+          className={`${styles.statusIndicator} ${isConnected ? styles.connected : styles.disconnected}`}
         />
         <span>Status: {connectionState}</span>
       </div>
 
       {/* Error Display */}
-      {error && <div className="error-message">Error: {error}</div>}
+      {error && <div className={styles.errorMessage}>Error: {error}</div>}
 
       {/* Connection Controls */}
-      <div className="controls">
+      <div className={styles.controls}>
         <button onClick={startConnection} disabled={isConnected}>
           Connect
         </button>
@@ -48,18 +47,18 @@ function App() {
       </div>
 
       {/* Messages List */}
-      <div className="messages-container">
-        <h2>Incoming Messages ({messages.length})</h2>
+      <div className={styles.messagesContainer}>
+        <h2 className={styles.messagesTitle}>Incoming Messages ({messages.length})</h2>
         {messages.length === 0 ? (
-          <p className="no-messages">No messages received yet. Waiting for incoming messages...</p>
+          <p className={styles.noMessages}>No messages received yet. Waiting for incoming messages...</p>
         ) : (
-          <ul className="messages-list">
+          <ul className={styles.messagesList}>
             {messages.map((msg) => (
-              <li key={msg.id} className="message-item">
-                <span className="message-time">
+              <li key={msg.id} className={styles.messageItem}>
+                <span className={styles.messageTime}>
                   {msg.timestamp.toLocaleTimeString()}
                 </span>
-                <span className="message-content">{msg.content}</span>
+                <span className={styles.messageContent}>{msg.content}</span>
               </li>
             ))}
           </ul>
@@ -67,7 +66,7 @@ function App() {
       </div>
 
       {/* Configuration Info */}
-      <div className="config-info">
+      <div className={styles.configInfo}>
         <p>
           <strong>Hub URL:</strong> {SIGNALR_HUB_URL || 'Not configured'}
         </p>

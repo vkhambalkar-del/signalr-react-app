@@ -3,8 +3,6 @@ import * as signalR from '@microsoft/signalr';
 
 interface UseSignalROptions {
   hubUrl: string;
-  accessToken?: string;
-  accessTokenFactory?: () => string | Promise<string>;
   autoConnect?: boolean;
 }
 
@@ -16,8 +14,6 @@ interface SignalRMessage {
 
 export function useSignalR({
   hubUrl,
-  accessToken,
-  accessTokenFactory,
   autoConnect = true,
 }: UseSignalROptions) {
   const [connection, setConnection] = useState<signalR.HubConnection | null>(null);
@@ -28,19 +24,13 @@ export function useSignalR({
   const [error, setError] = useState<string | null>(null);
   const connectionRef = useRef<signalR.HubConnection | null>(null);
 
-  // Initialize connection with access token
+  // Initialize connection
   useEffect(() => {
-    // Determine the token factory to use
-    const tokenFactory = accessTokenFactory || (accessToken ? () => accessToken : undefined);
-
-    const connectionBuilder = new signalR.HubConnectionBuilder()
-      .withUrl(hubUrl, {
-        accessTokenFactory: tokenFactory,
-      })
+    const newConnection = new signalR.HubConnectionBuilder()
+      .withUrl(hubUrl)
       .withAutomaticReconnect()
-      .configureLogging(signalR.LogLevel.Information);
-
-    const newConnection = connectionBuilder.build();
+      .configureLogging(signalR.LogLevel.Information)
+      .build();
 
     connectionRef.current = newConnection;
     setConnection(newConnection);
@@ -66,13 +56,13 @@ export function useSignalR({
         connectionRef.current.stop();
       }
     };
-  }, [hubUrl, accessToken, accessTokenFactory]);
+  }, [hubUrl]);
 
   // Register message listener
   useEffect(() => {
     if (!connection) return;
 
-    // Listen for incoming messages - adjust method name based on your server
+    // Listen for incoming messages
     const handleReceiveMessage = (message: string) => {
       console.log('Received message:', message);
       const newMessage: SignalRMessage = {
