@@ -143,3 +143,23 @@
 .configInfo strong {
   color: #475569;
 }
+
+/* Navigation */
+.navigation {
+  margin-top: 1.5rem;
+}
+
+.navLink {
+  color: #646cff;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border: 1px solid #646cff;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.navLink:hover {
+  background-color: #646cff;
+  color: white;
+}

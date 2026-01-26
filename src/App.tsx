@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useSignalR } from './hooks/useSignalR';
 import styles from './App.module.css';
 import { version } from '../package.json';
@@ -70,6 +71,11 @@ function App() {
         <p>
           <strong>Hub URL:</strong> {SIGNALR_HUB_URL || 'Not configured'}
         </p>
+      </div>
+
+      {/* Navigation */}
+      <div className={styles.navigation}>
+        <Link to="/grid" className={styles.navLink}>View Employee Grid</Link>
       </div>
     </div>
   );
