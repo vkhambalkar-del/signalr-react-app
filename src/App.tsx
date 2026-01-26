@@ -57,7 +57,7 @@ function App() {
             {messages.map((msg) => (
               <li key={msg.id} className={styles.messageItem}>
                 <span className={styles.messageTime}>
-                  {msg.timestamp.toLocaleTimeString()}
+                  {new Date(msg.timestamp).toLocaleTimeString()}
                 </span>
                 <span className={styles.messageContent}>{msg.content}</span>
               </li>
